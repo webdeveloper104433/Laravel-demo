@@ -29,7 +29,7 @@ class FlowsController extends Controller
     public function index()
     {
 
-        $flows = Flow::orderBy('user_id')->orderByDesc('id')->get();
+        $flows = Flow::where('user_id', auth()->user()->id)->orderByDesc('id')->get();
 
         return view('admin/flows/index', ['flows' => $flows, 'page_name' => self::PAGE_NAME]);
     }
@@ -134,13 +134,13 @@ class FlowsController extends Controller
             case 'App\Image':
             case 'App\Gallery':
             case 'App\Site':
-                $flow_entriable_names = $request->flow_entriable_type::orderBy('name')->get();
+                $flow_entriable_names = $request->flow_entriable_type::where('user_id', auth()->user()->id)->orderBy('name')->get();
                 break;
             case 'App\Device':
-                $flow_entriable_names = $request->flow_entriable_type::orderBy('device_code')->get();
+                $flow_entriable_names = $request->flow_entriable_type::where('user_id', auth()->user()->id)->orderBy('device_code')->get();
                 break;
             case 'App\Schedule':
-                $flow_entriable_names = Schedule::select('id', 'name')->groupBy('name')->orderBy('name')->get();
+                $flow_entriable_names = Schedule::select('id', 'name')->where('user_id', auth()->user()->id)->groupBy('name')->orderBy('name')->get();
                 break;
         }
 

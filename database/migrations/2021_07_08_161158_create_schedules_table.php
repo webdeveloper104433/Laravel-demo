@@ -15,7 +15,7 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->string('date');
             $table->string('time');
             $table->string('name');
             $table->enum('type', ['kids', 'adults', 'general'])->nullable();

@@ -30,7 +30,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::where('type', '<>', 'super_admin')->where('id', '<>', auth()->user()->id)->get();
+        $current_admin = auth()->user();
+        
+        $users = $current_admin->users;
+
         return view('admin/users/index', ['users' => $users, 'page_name' => self::PAGE_NAME]);
     }
 
@@ -67,8 +70,13 @@ class UsersController extends Controller
         $user = new User($request->all());
         $user->status = $request->status;
         $user->password = Hash::make($request->password);
-        $user->type = 'admin';
-        $user->client_id = auth()->user()->client_id;
+        if (auth()->user()->type == 'admin') {
+            $user->type = 'user';
+            $user->client_id = auth()->user()->client_id;
+        } elseif (auth()->user()->type == 'super_admin') {
+            $user->type = 'admin';
+        }
+        $user->user_id = auth()->user()->id;
         $user->save();
 
         return redirect(route('admin.users'))->with('success', 'A new user was created.');

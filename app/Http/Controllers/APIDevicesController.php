@@ -78,7 +78,7 @@ class APIDevicesController extends Controller
                     return response()->json(["info" => "New device registered, please wait for enabling"]);
                 } else if($device->enabled) {
 					if ($device->client_id) {
-	                    return response()->json(["status"=>'Already exist']);
+	                    return response()->json(["id"=>$device->client_id]);
 					} else {
 						return response()->json(["error" => "Not assign client"]);
 					}
@@ -100,7 +100,7 @@ class APIDevicesController extends Controller
 					return response()->json(["error" => "Not register"]);
 				}
 				
-                return $device->toJson();
+                return response()->json(["configuration" => $device->configuration]);
 
                 break;
             case "heartbeat":

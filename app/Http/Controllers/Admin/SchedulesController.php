@@ -30,7 +30,7 @@ class SchedulesController extends Controller
     public function index()
     {
         
-        $schedules = Schedule::orderBy('user_id')->orderByDesc('id')->get();
+        $schedules = Schedule::where('user_id', auth()->user()->id)->orderByDesc('id')->get();
 
         return view('admin/schedules/index', ['schedules' => $schedules, 'page_name' => self::PAGE_NAME]);
     }
@@ -42,7 +42,7 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        $images = Image::orderBy('name')->get();
+        $images = Image::where('user_id', auth()->user()->id)->orderBy('name')->get();
         return view('admin/schedules/create', ['images' => $images, 'page_name' => self::PAGE_NAME]);
     }
 
@@ -84,7 +84,7 @@ class SchedulesController extends Controller
     public function edit($id)
     {
         $schedule = Schedule::find($id);
-        $images = Image::orderBy('name')->get();
+        $images = Image::where('user_id', auth()->user()->id)->orderBy('name')->get();
         
         if (empty($schedule)) {
             return redirect(route('admin.schedules'))->with('warning', 'warning.');

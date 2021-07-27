@@ -30,7 +30,7 @@ class ImagesController extends Controller
     public function index()
     {
 
-        $images = Image::orderBy('user_id')->orderByDesc('id')->get();
+        $images = Image::where('user_id', auth()->user()->id)->orderByDesc('id')->get();
 
         return view('admin/images/index', ['images' => $images, 'page_name' => self::PAGE_NAME]);
     }
