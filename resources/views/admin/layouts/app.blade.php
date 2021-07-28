@@ -18,6 +18,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/DataTables/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/DataTables/bootstrap.css') }}">
         <link href="{{ asset('plugins/DataTables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -127,10 +128,10 @@
 		
 		<div style="position: fixed;top: 0px;left: 0px;background: rgb(95 93 90 / 31%);color: rgb(255 0 0); display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; z-index: 9999; display: none;" class="spinner"></div>
     </body>
-    <script type="text/javascript" src="{{ asset('plugins/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/backend/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/DataTables/jquery.dataTables.min.js') }}"></script>
     
-    <script type="text/javascript" src="{{ asset('plugins/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/backend/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('plugins/DataTables/dataTables.bootstrap4.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>

@@ -8,11 +8,12 @@ use App\Device;
 use App\User;
 use App\Client;
 use App\Gallery;
+use App\Site;
 
 class APIDevicesController extends Controller
 {
     public function index(Request $request) {
-        if (empty($request->all()) || $request->filled("google") || $request->filled("flow")) {
+        if (empty($request->all()) || $request->filled("google") || $request->filled("flow") || $request->filled("site")) {
             $data = [];
 			if ($request->filled('title') && $request->title == "off") {
                 $data['title'] = 'off';
@@ -25,10 +26,20 @@ class APIDevicesController extends Controller
                         foreach ($client->users as $user) {
 
                             if (!empty($user)) {
-                                $gallery = Gallery::where('user_id', $user->id)->where('name', $request->google)->first();
-                                if ($gallery) {
-                                    $data['google_images'] = $gallery->sync_google_images;
-									$data['label'] = $gallery->sync_google_images()->first()->title;
+
+                                if ($request->filled("google")) {
+                                    $gallery = Gallery::where('user_id', $user->id)->where('name', $request->google)->first();
+                                    if ($gallery) {
+                                        $data['google_images'] = $gallery->sync_google_images;
+    									$data['label'] = $gallery->sync_google_images()->first()->title;
+                                    }
+
+                                    return view('google_gallery', ['data' => $data]);
+                                } elseif ($request->filled("site")) {
+
+                                    $data['site'] = Site::where('user_id', $user->id)->where('name', $request->site)->first();
+
+                                    return view('site', $data);
                                 }
                                 // dd($data);
                             }
