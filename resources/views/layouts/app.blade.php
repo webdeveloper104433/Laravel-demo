@@ -32,9 +32,7 @@
 <body>
 
 <div>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="background-color: #808080; ">
     @yield('content')
-  </div>
 </div>
 </body>
 <script type="text/javascript">

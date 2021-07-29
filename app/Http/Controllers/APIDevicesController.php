@@ -9,11 +9,13 @@ use App\User;
 use App\Client;
 use App\Gallery;
 use App\Site;
+use App\Schedule;
 
 class APIDevicesController extends Controller
 {
     public function index(Request $request) {
-        if (empty($request->all()) || $request->filled("google") || $request->filled("flow") || $request->filled("site")) {
+
+        if (empty($request->all()) || $request->filled("google") || $request->filled("flow") || $request->filled("site") || $request->filled("schedule")) {
             $data = [];
 			if ($request->filled('title') && $request->title == "off") {
                 $data['title'] = 'off';
@@ -40,9 +42,16 @@ class APIDevicesController extends Controller
                                     $data['site'] = Site::where('user_id', $user->id)->where('name', $request->site)->first();
 
                                     return view('site', $data);
+                                } elseif ($request->filled("schedule")) {
+                                    
+                                    $data['schedules'] = Schedule::where('user_id', $user->id)->where('name', $request->schedule)->get();
+
+                                    return view('schedule', $data);
                                 }
                                 // dd($data);
                             }
+
+
                         }
                     }
                 }
