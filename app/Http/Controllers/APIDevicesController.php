@@ -45,7 +45,7 @@ class APIDevicesController extends Controller
                                 } elseif ($request->filled("schedule")) {
                                     
                                     $data['schedules'] = Schedule::where('user_id', $user->id)->where('name', $request->schedule)->get();
-
+                                    $data['schedule_title'] = $request->schedule;
                                     return view('schedule', $data);
                                 }
                                 // dd($data);
