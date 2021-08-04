@@ -23,7 +23,7 @@
                             <form method="POST" action="{{ url('admin/clients/' . $client->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <!-- name -->
+<!-- name -->
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -31,7 +31,7 @@
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $client->name }}" required autocomplete="name" autofocus placeholder="Name">
                                     </div>
                                 </div>
-                                <!-- description -->
+        <!-- description -->
                                 <div class="form-group row">
                                     <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
 
-                                <!-- address -->
+        <!-- address -->
                                 <div class="form-group row">
                                     <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
@@ -48,7 +48,7 @@
                                         <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ $client->address }}" required autocomplete="address" autofocus placeholder="Address">
                                     </div>
                                 </div>
-                                <!-- status -->
+        <!-- status -->
                                 <div class="form-group row">
                                     <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
 

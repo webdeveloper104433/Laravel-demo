@@ -30,10 +30,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $current_admin = auth()->user();
+        //$users = User::where('type', '<>', 'super_admin')->where('id', '<>', auth()->user()->id)->get();
+		$current_admin = auth()->user();
         
         $users = $current_admin->users;
-
+		
         return view('admin/users/index', ['users' => $users, 'page_name' => self::PAGE_NAME]);
     }
 

@@ -20,7 +20,7 @@ $(document).ready(function(){
 
                 if (flow_entriable_type == 'App\\Schedule') {
                     for (var i = 0; i < data.flow_entriable_names.length; i++) {
-                        optionHtml += '<option value="' + data.flow_entriable_names[i].id + '">' + data.flow_entriable_names[i].name + '</option>';
+                        optionHtml += '<option value="' + data.flow_entriable_names[i].name + '">' + data.flow_entriable_names[i].name + '</option>';
                     }
                 } else {
 
@@ -97,7 +97,12 @@ $(document).ready(function(){
                     for (var i = 0; i < data.flow_entriable_names.length; i++) {
                         optionHtml += '<option value="' + data.flow_entriable_names[i].id + '">' + data.flow_entriable_names[i].device_code + '</option>';
                     }
-                } else {
+                } else if (data.flow_entry.flow_entriable_type == 'App\\Schedule')
+				{
+					for (var i = 0; i < data.flow_entriable_names.length; i++) {
+                        optionHtml += '<option value="' + data.flow_entriable_names[i].name + '">' + data.flow_entriable_names[i].name + '</option>';
+                    }
+				} else {
 
                     for (var i = 0; i < data.flow_entriable_names.length; i++) {
                         optionHtml += '<option value="' + data.flow_entriable_names[i].id + '">' + data.flow_entriable_names[i].name + '</option>';

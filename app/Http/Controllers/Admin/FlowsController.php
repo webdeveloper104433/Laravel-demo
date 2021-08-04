@@ -29,7 +29,7 @@ class FlowsController extends Controller
     public function index()
     {
 
-        $flows = Flow::where('user_id', auth()->user()->id)->orderByDesc('id')->get();
+        $flows = Flow::where('user_id', auth()->user()->id)->orderBy('user_id')->orderByDesc('id')->get();
 
         return view('admin/flows/index', ['flows' => $flows, 'page_name' => self::PAGE_NAME]);
     }
@@ -140,7 +140,7 @@ class FlowsController extends Controller
                 $flow_entriable_names = $request->flow_entriable_type::where('user_id', auth()->user()->id)->orderBy('device_code')->get();
                 break;
             case 'App\Schedule':
-                $flow_entriable_names = Schedule::select('id', 'name')->where('user_id', auth()->user()->id)->groupBy('name')->orderBy('name')->get();
+                $flow_entriable_names = Schedule::select('name')->where('user_id', auth()->user()->id)->groupBy('name')->orderBy('name')->get();
                 break;
         }
 
@@ -154,7 +154,7 @@ class FlowsController extends Controller
         $validator = $request->validate([
             'sequence' => 'required|integer|unique:flow_entries',
 			'flow_entriable_type' => 'required',
-			'flow_entriable_id' => 'required|integer',
+			'flow_entriable_id' => 'required',
         ]);
 
         $flow_entry = new FlowEntry($request->all());
@@ -176,12 +176,15 @@ class FlowsController extends Controller
             case 'App\Image':
             case 'App\Gallery':
             case 'App\Site':
-            case 'App\Schedule':
-                $flow_entriable_names = $flow_entry->flow_entriable_type::orderBy('name')->get();
+                $flow_entriable_names = $flow_entry->flow_entriable_type::where('user_id', auth()->user()->id)->orderBy('name')->get();
                 break;
             case 'App\Device':
-                $flow_entriable_names = $flow_entry->flow_entriable_type::orderBy('device_code')->get();
+                $flow_entriable_names = $flow_entry->flow_entriable_type::where('user_id', auth()->user()->id)->orderBy('device_code')->get();
                 break;
+            case 'App\Schedule':
+                $flow_entriable_names = Schedule::select('name')->where('user_id', auth()->user()->id)->groupBy('name')->orderBy('name')->get();
+                break;
+				
         }
 
         return response()->json([
@@ -199,7 +202,7 @@ class FlowsController extends Controller
                             Rule::unique('flow_entries')->ignore($flow_entry_id),
                         ],
 			'flow_entriable_type' => 'required',
-			'flow_entriable_id' => 'required|integer',
+			'flow_entriable_id' => 'required',
         ]);
 
         $flow_entry = FlowEntry::find($flow_entry_id);

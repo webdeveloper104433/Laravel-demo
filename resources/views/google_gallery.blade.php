@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="background-color: #808080; ">
-
     @if (!(array_key_exists('title', $data) && $data['title'] == 'off'))
       <h2 id="image-title" style="text-align: center; margin-top: 0px;margin-bottom:0px; padding-top: 20px; height: 10vh">@if (array_key_exists('label', $data)) {{ $data['label'] }} @endif </h2>
     @endif
@@ -30,6 +28,5 @@
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
 
 @endsection

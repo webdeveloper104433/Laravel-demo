@@ -18,7 +18,6 @@
 
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/DataTables/bootstrap.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/DataTables/bootstrap.css') }}">
         <link href="{{ asset('plugins/DataTables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.standalone.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -120,7 +119,12 @@
                     </div>
                 </div>
             </nav>
-
+			@auth
+				<div class="container">
+					<br>
+					<h5>{{ Auth::user()->client->name }} ({{ Auth::user()->client->description }})</h5>
+				</div>
+			@endauth
             <main class="py-4">
                 @yield('content')
             </main>
@@ -132,6 +136,7 @@
     <script type="text/javascript" src="{{ asset('plugins/DataTables/jquery.dataTables.min.js') }}"></script>
     
     <script type="text/javascript" src="{{ asset('plugins/backend/bootstrap.min.js') }}"></script>
+    
     <script type="text/javascript" src="{{ asset('plugins/DataTables/dataTables.bootstrap4.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>

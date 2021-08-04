@@ -28,7 +28,7 @@ class SitesController extends Controller
     public function index()
     {
 
-        $sites = Site::where('user_id', auth()->user()->id)->orderByDesc('id')->get();
+        $sites = Site::where('user_id', auth()->user()->id)->orderBy('user_id')->orderByDesc('id')->get();
 
         return view('admin.sites/index', ['sites' => $sites, 'page_name' => self::PAGE_NAME]);
     }

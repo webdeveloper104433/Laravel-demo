@@ -78,7 +78,6 @@
                                 <th>Run From</th>
                                 <th>Run To</th>
                                 <th>Dates</th>
-                                <th>Client Name</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -99,7 +98,6 @@
                                         <td>{{ $flow_entry->run_from }}</td>
                                         <td>{{ $flow_entry->run_to }}</td>
                                         <td>{{ $flow_entry->dates }}</td>
-                                        <td>{{ $flow_entry->user->first_name . ' ' . $flow_entry->user->last_name}}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                               <a href="#" data-id="{{ $flow_entry->id }}" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-flow-entry-edit">Edit</a>

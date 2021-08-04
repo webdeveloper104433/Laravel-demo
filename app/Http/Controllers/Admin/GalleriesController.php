@@ -28,7 +28,7 @@ class GalleriesController extends Controller
     public function index()
     {
 
-        $galleries = Gallery::where('user_id', auth()->user()->id)->orderByDesc('id')->get();
+        $galleries = Gallery::where('user_id', auth()->user()->id)->orderBy('user_id')->orderByDesc('id')->get();
 
         return view('admin/galleries/index', ['galleries' => $galleries, 'page_name' => self::PAGE_NAME]);
     }

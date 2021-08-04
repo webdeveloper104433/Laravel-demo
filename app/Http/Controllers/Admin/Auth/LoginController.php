@@ -88,7 +88,6 @@ class LoginController extends Controller
 					Auth::login($user);
                     return $this->sendLoginResponse($request);
 				}
-
                 if ($user->type == "admin" && $user->status == 1) {
                     Auth::login($user);
                     return $this->sendLoginResponse($request);

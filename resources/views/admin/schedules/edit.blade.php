@@ -64,7 +64,7 @@
                             <label for="line2" class="col-md-4 col-form-label text-md-right">{{ __('Line2') }}</label>
 
                             <div class="col-md-6">
-                                <input id="line2" line2="text" class="form-control @error('line2') is-invalid @enderror" name="line2" value="{{ $schedule->line2 }}" required autocomplete="line2" placeholder="Line2">
+                                <input id="line2" line2="text" class="form-control" name="line2" value="{{ $schedule->line2 }}" autocomplete="line2" placeholder="Line2">
                             </div>
                         </div>
 <!-- line3 -->
@@ -72,7 +72,7 @@
                             <label for="line3" class="col-md-4 col-form-label text-md-right">{{ __('Line3') }}</label>
 
                             <div class="col-md-6">
-                                <input id="line3" line3="text" class="form-control @error('line3') is-invalid @enderror" name="line3" value="{{ $schedule->line3 }}" required autocomplete="line3" placeholder="Line3">
+                                <input id="line3" line3="text" class="form-control" name="line3" value="{{ $schedule->line3 }}" autocomplete="line3" placeholder="Line3">
                             </div>
                         </div>
 <!-- image -->

@@ -30,7 +30,7 @@ class SchedulesController extends Controller
     public function index()
     {
         
-        $schedules = Schedule::where('user_id', auth()->user()->id)->orderByDesc('id')->get();
+        $schedules = Schedule::where('user_id', auth()->user()->id)->orderBy('user_id')->orderByDesc('id')->get();
 
         return view('admin/schedules/index', ['schedules' => $schedules, 'page_name' => self::PAGE_NAME]);
     }
@@ -114,8 +114,6 @@ class SchedulesController extends Controller
                         Rule::in(['kids', 'adults', 'general']),
                     ],
             'line1' => 'required|string|max:250',
-            'line2' => 'required|string|max:250',
-            'line3' => 'required|string|max:250',
             'image_id' => 'nullable|exists:images,id',
 
         ]);

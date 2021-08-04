@@ -36,9 +36,9 @@
     }
   </style>
 
-  <div class="container">
+  <div class="container-full" style="padding: 10px;">
     <!-- Wrapper for slides -->
-    <h1>Termine</h1>
+    <h1 style="font-weight: bold;">Termine</h1>
 
     <div class="table-responsive text-center" style="margin-top: 20px;">
 
@@ -46,26 +46,33 @@
         <tbody>
           @foreach ($schedules as $schedule)
             @if (($loop->index + 2) % 2 == 0)
-              <tr>
+              <tr class="slide-tr slide-number-{{ ceil(($loop->index + 1) / 4) }}">
             @endif
-                <td class="schedule-border" style="@if (($loop->index + 2) % 2 == 0) background-color: #0389f7; @else background-color: #e2e2e2; @endif">
+                <td class="schedule-border" style="padding: 10px; @if (($loop->index + 2) % 2 == 0) background-color: #0389f7; @else background-color: #e2e2e2; @endif">
                   <div>
-                    <img src="{{ asset('storage') . '/' . $schedule->image->url }}" class="img-thumbnail">
+                    <img src="{{ asset('storage') . '/' . $schedule->image->url }}" style="@if (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 2 == 1) && (($loop->index + 1) % 4 == 1)) width: auto; height: 70vh;  @else width: 250px; height: 166px; @endif">
                   </div>
-                  <div style="font-size: 25px;">
+                  <div style="">
                     <strong>
-                      {{ date('l', strtotime($schedule->date)) }}, {{ $schedule->date }}
-                      <br>
-                      Time: {{ $schedule->time }} Clock
+                      <h3 style="font-weight: bold; padding-top: 25px; padding-bottom: 25px;">
+						{{ __('schedule.' . date('l', strtotime($schedule->date))) }}, {{ date('d.m', strtotime($schedule->date)) }}
+						<br>
+						{{ __('schedule.time') }}: {{ $schedule->time }}
+					  </h3>
+					  
                     </strong>
                   </div>
-                  <div style="margin-top: 10px;">
+                  <div>
                     <strong>
-                      {{ $schedule->line1 }}
-                      <br>
-                      {{ $schedule->line2 }}
-                      <br>
-                      {{ $schedule->line3 }}
+                      <div>
+						  {{ $schedule->line1 }}
+					  </div>
+				 	  <div>
+                      	{{ $schedule->line2 }}
+					  </div>
+					  <div>
+                      	{{ $schedule->line3 }}
+					  </div>
                     </strong>
                   </div>
                 </td>
@@ -78,4 +85,24 @@
       </table>
     </div>
   </div>
+
+<script>
+		var number = 1;
+
+	showSlider();
+	//$(".slide-tr").hide();
+	//$(".slide-number-" + number).show();
+	
+	function showSlider() {
+		$(".slide-tr").hide();
+		$(".slide-number-" + number).show();
+		number++;
+
+		if (!$(".slide-number-" + number).length) {
+			number = 1;
+		}
+		
+		setTimeout(function(){ showSlider(); }, 5000);	
+	}
+</script>
 @endsection

@@ -39,12 +39,14 @@ class APIDevicesController extends Controller
                                     return view('google_gallery', ['data' => $data]);
                                 } elseif ($request->filled("site")) {
 
-                                    $data['site'] = Site::where('user_id', $user->id)->where('name', $request->site)->first();
+                                    $data['site'] = Site::where('user_id', $user->id)->where('name', $request->site)->whereDate()->first();
 
                                     return view('site', $data);
                                 } elseif ($request->filled("schedule")) {
-                                    
-                                    $data['schedules'] = Schedule::where('user_id', $user->id)->where('name', $request->schedule)->get();
+									
+									
+									$data['schedules'] = Schedule::where('user_id', $user->id)->where('name', $request->schedule)->orderBy('date')->orderBy('time')->get();
+									
                                     $data['schedule_title'] = $request->schedule;
                                     return view('schedule', $data);
                                 }
