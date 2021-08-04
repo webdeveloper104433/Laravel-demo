@@ -65,7 +65,9 @@ class APIDevicesController extends Controller
                                         } elseif ($flow_entry->flow_entriable_type == "App\Site") {
                                             $data['sites'][$flow_entry->id] = Site::find($flow_entry->flow_entriable_id);
                                         } elseif ($flow_entry->flow_entriable_type == "App\Schedule") {
+                                            
                                             $data['schedules'][$flow_entry->id] = Schedule::where('name', $flow_entry->flow_entriable_id)->orderBy('date')->orderBy('time')->get();
+
                                         }
                                     }
                                     return view('flow', ['data' => $data]);
