@@ -10,7 +10,7 @@ use App\Client;
 use App\Gallery;
 use App\Site;
 use App\Schedule;
-
+use App\Flow;
 class APIDevicesController extends Controller
 {
     public function index(Request $request) {
@@ -33,13 +33,16 @@ class APIDevicesController extends Controller
                                     $gallery = Gallery::where('user_id', $user->id)->where('name', $request->google)->first();
                                     if ($gallery) {
                                         $data['google_images'] = $gallery->sync_google_images;
-    									$data['label'] = $gallery->sync_google_images()->first()->title;
+    									$data['label'] = "";
+                                        if ($gallery->sync_google_images()->first()) {
+                                            $data['label'] = $gallery->sync_google_images()->first()->title;
+                                        }
                                     }
 
                                     return view('google_gallery', ['data' => $data]);
                                 } elseif ($request->filled("site")) {
 
-                                    $data['site'] = Site::where('user_id', $user->id)->where('name', $request->site)->whereDate()->first();
+                                    $data['site'] = Site::where('user_id', $user->id)->where('name', $request->site)->first();
 
                                     return view('site', $data);
                                 } elseif ($request->filled("schedule")) {
@@ -47,8 +50,25 @@ class APIDevicesController extends Controller
 									
 									$data['schedules'] = Schedule::where('user_id', $user->id)->where('name', $request->schedule)->orderBy('date')->orderBy('time')->get();
 									
-                                    $data['schedule_title'] = $request->schedule;
                                     return view('schedule', $data);
+                                } elseif ($request->filled("flow")) {
+                                    
+                                    $flow = Flow::where('name', $request->flow)->first();
+                                    $flow_entries  = $flow->flow_entries()->whereDate('run_from', '<=', date('d.m.Y'))->whereDate('run_to', '>=', date('d.m.Y'))->get();
+
+                                    foreach ($flow_entries as $flow_entry) {
+                                        if ($flow_entry->flow_entriable_type == "App\Gallery") {
+                                            $gallery = Gallery::find($flow_entry->flow_entriable_id);
+                                            if ($gallery) {
+                                                $data['google_images'][$flow_entry->id] = $gallery->sync_google_images;
+                                            }
+                                        } elseif ($flow_entry->flow_entriable_type == "App\Site") {
+                                            $data['sites'][$flow_entry->id] = Site::find($flow_entry->flow_entriable_id);
+                                        } elseif ($flow_entry->flow_entriable_type == "App\Schedule") {
+                                            $data['schedules'][$flow_entry->id] = Schedule::where('name', $flow_entry->flow_entriable_id)->orderBy('date')->orderBy('time')->get();
+                                        }
+                                    }
+                                    return view('flow', ['data' => $data]);
                                 }
                                 // dd($data);
                             }
