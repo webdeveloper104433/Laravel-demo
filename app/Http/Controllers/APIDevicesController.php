@@ -20,6 +20,15 @@ class APIDevicesController extends Controller
 			if ($request->filled('title') && $request->title == "off") {
                 $data['title'] = 'off';
             }
+			
+			if ($request->filled('border')) {
+				$data['border'] = $request->border;
+			}
+			
+			if ($request->filled('color')) {
+				$data['color'] = $request->color;
+			}
+			
             if ($request->filled('clientname')) {
                 $client = Client::where('name', $request->clientname)->first();
 
@@ -54,20 +63,27 @@ class APIDevicesController extends Controller
                                 } elseif ($request->filled("flow")) {
                                     
                                     $flow = Flow::where('name', $request->flow)->first();
-                                    $flow_entries  = $flow->flow_entries()->whereDate('run_from', '<=', date('d.m.Y'))->whereDate('run_to', '>=', date('d.m.Y'))->get();
+                                    $flow_entries  = $flow->flow_entries()->get();
 
                                     foreach ($flow_entries as $flow_entry) {
                                         if ($flow_entry->flow_entriable_type == "App\Gallery") {
                                             $gallery = Gallery::find($flow_entry->flow_entriable_id);
                                             if ($gallery) {
                                                 $data['google_images'][$flow_entry->id] = $gallery->sync_google_images;
+                                                //$data['time']['google_images'][$flow_entry->id] = $flow_entry->time;
+												
+												$data['tilte']['google_images'][$flow_entry->id] = "";
+                                                if ($gallery->sync_google_images()->first()) {
+                                                    $data['title']['google_images'][$flow_entry->id] = $gallery->sync_google_images()->first()->title;
+                                                }
                                             }
                                         } elseif ($flow_entry->flow_entriable_type == "App\Site") {
                                             $data['sites'][$flow_entry->id] = Site::find($flow_entry->flow_entriable_id);
+                                            $data['time']['sites'][$flow_entry->id] = $flow_entry->time;
                                         } elseif ($flow_entry->flow_entriable_type == "App\Schedule") {
                                             
                                             $data['schedules'][$flow_entry->id] = Schedule::where('name', $flow_entry->flow_entriable_id)->orderBy('date')->orderBy('time')->get();
-
+                                            $data['time']['schedules'][$flow_entry->id] = $flow_entry->time;
                                         }
                                     }
                                     return view('flow', ['data' => $data]);

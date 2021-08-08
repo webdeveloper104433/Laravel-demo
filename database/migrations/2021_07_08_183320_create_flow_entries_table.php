@@ -21,8 +21,8 @@ class CreateFlowEntriesTable extends Migration
             $table->string('flow_entriable_id');
             $table->integer('time')->nullable();
             $table->integer('sequence')->default(0);
-            $table->string('run_from')->nullable();
-            $table->string('run_to')->nullable();
+            $table->date('run_from')->nullable();
+            $table->date('run_to')->nullable();
             $table->string('dates')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
