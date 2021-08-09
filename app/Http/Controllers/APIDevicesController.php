@@ -28,6 +28,10 @@ class APIDevicesController extends Controller
 			if ($request->filled('color')) {
 				$data['color'] = $request->color;
 			}
+
+            if ($request->filled('design')) {
+                $data['design'] = $request->design;
+            }
 			
             if ($request->filled('clientname')) {
                 $client = Client::where('name', $request->clientname)->first();

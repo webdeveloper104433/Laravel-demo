@@ -1,56 +1,29 @@
 @extends('layouts.app')
 
+@push('styles')
+  <link rel="stylesheet" href="{{ asset('css/pages/schedule.css')}}">
+  @if (isset($design))
+    <link rel="stylesheet" href="{{ asset('css') . '/' . $design . '.css' }}">
+  @endif
+@endpush
 
 @section('content')
 
-  <style type="text/css">
-    .item-border {
-      border: 1px solid black;
-
-      height: 200px;
-    }
-    img {
-      width: 250px;
-      height: 166px;
-    }
-
-    table {
-      width: 100%;
-      display: table;
-      border-collapse: separate;
-      box-sizing: border-box;
-      text-indent: initial;
-      border-spacing: 10px;
-      border-color: grey;
-      border: 1px solid grey;
-      border-radius: 20px;
-    }
-
-    .schedule-border {
-      border: 1px solid black;
-      padding: 10px;
-    }
-
-    td {
-      font-size: 20px;
-    }
-  </style>
-
   <div class="container-full" style="padding: 10px;">
     <!-- Wrapper for slides -->
-    <h1 style="font-weight: bold;">Termine</h1>
+    <h1 class="schedule-title">Termine</h1>
 
     <div class="table-responsive text-center" style="margin-top: 20px;">
 
-      <table style="width: 100%; " cellspacing="10px">
+      <table class="schedule-content" cellspacing="10px">
         <tbody>
           @foreach ($schedules as $schedule)
             @if (($loop->index + 2) % 2 == 0)
               <tr class="slide-tr slide-number-{{ ceil(($loop->index + 1) / 4) }}">
             @endif
-                <td class="schedule-border" style="padding: 10px; @if (($loop->index + 2) % 2 == 0) background-color: #0389f7; @else background-color: #e2e2e2; @endif">
+                <td class="schedule-border @if (($loop->index + 2) % 2 == 0) left-background-color @else right-background-color @endif">
                   <div>
-                    <img src="{{ asset('storage') . '/' . $schedule->image->url }}" style="@if (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 2 == 1) && (($loop->index + 1) % 4 == 1)) width: auto; height: 70vh;  @else width: 250px; height: 166px; @endif">
+                    <img src="{{ asset('storage') . '/' . $schedule->image->url }}" class="@if (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 2 == 1) && (($loop->index + 1) % 4 == 1)) image-one-item  @else image-item @endif">
                   </div>
                   <div style="">
                     <strong>
