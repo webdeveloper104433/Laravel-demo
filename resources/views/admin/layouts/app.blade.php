@@ -122,7 +122,7 @@
 			@auth
 				<div class="container">
 					<br>
-					<h5>{{ Auth::user()->client->name }} ({{ Auth::user()->client->description }})</h5>
+					<h5>@if(Auth::user()->client) {{ Auth::user()->client->name }} ({{ Auth::user()->client->description }}) @endif</h5>
 				</div>
 			@endauth
             <main class="py-4">

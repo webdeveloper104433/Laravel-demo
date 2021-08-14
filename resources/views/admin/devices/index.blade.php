@@ -22,8 +22,7 @@
                                 <th>Code</th>
                                 <th>Active</th>
                                 <th>Last Access</th>
-                                <th>Description</th>
-								<th>Client Name</th>
+                                <th>Configuration</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -34,8 +33,7 @@
                                         <td>{{ $device->device_code }}</td>
                                         <td>@if ($device->enabled) Enabled @else Disabled @endif</td>
                                         <td>{{ $device->timestamp_last_accessed }}</td>
-                                        <td>{{ $device->description }}</td>
-										<td>@if ($device->client) {{ $device->client->name }} @endif</td>
+                                        <td>{{ $device->configuration }}</td>
                                         <td>
 											<div class="btn-group btn-group-sm">
 												<a href="{{ url('admin/devices/' . $device->id . '/edit') }}" class="btn btn-primary">Edit</a>

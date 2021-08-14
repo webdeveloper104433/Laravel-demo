@@ -1,11 +1,17 @@
-
-  .image-item {
-    width: 250px;
-    height: 166px;
+  body {
+    height: 100vh;
+    background-color: pink;
   }
-
+  .image-item {
+    max-height: 166px;
+  }
+  .img-thumbnail {
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
+  }
   .image-one-item {
-    height: 50vh;
+    max-height: 500px;
   }
 
   .schedule-content {

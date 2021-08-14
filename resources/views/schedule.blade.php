@@ -23,7 +23,7 @@
             @endif
                 <td class="schedule-border @if (($loop->index + 2) % 2 == 0) left-background-color @else right-background-color @endif">
                   <div>
-                    <img src="{{ asset('storage') . '/' . $schedule->image->url }}" class="@if (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 2 == 1) && (($loop->index + 1) % 4 == 1)) image-one-item  @else image-item @endif">
+                    <img src="{{ asset('storage') . '/' . $schedule->image->url }}" class="img-thumbnail @if (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 2 == 1) && (($loop->index + 1) % 4 == 1)) image-one-item  @else image-item @endif">
                   </div>
                   <div style="">
                     <strong>

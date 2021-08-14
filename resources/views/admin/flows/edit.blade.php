@@ -44,7 +44,7 @@
                                     <label for="layout" class="col-md-4 col-form-label text-md-right">{{ __('Layout') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="layout" type="text" class="form-control @error('layout') is-invalid @enderror" name="layout" value="{{ $flow->layout }}" autocomplete="layout" autofocus placeholder="Layout ex: width: 100px;height: 100px;">
+                                        <input id="layout" type="text" class="form-control @error('layout') is-invalid @enderror" name="layout" value="{{ $flow->layout }}" autocomplete="layout" autofocus placeholder="Layout">
                                     </div>
                                 </div>
 

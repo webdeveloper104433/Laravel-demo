@@ -127,7 +127,7 @@
         
     // });
     var totalItems = $('.item').length;
-    var currentIndex = $('div.active').index() + 1;
+    var index = $('div.active').index() + 1;
 
 
     var time = 3000;
@@ -135,19 +135,27 @@
     if ($($(".item")[0]).data('time')) {
       time = $($(".item")[0]).data('time') * 1000;
     }
+
     $('#myCarousel').carousel({
       pause: false,
       interval: time 
     });
+    
 
-    $('#myCarousel').on('slid.bs.carousel', function() {
-      c = $('#myCarousel');
-      currentIndex = $('div.active').index() + 1;
-      console.log($('div.active').index());
+    $('#myCarousel').on('slide.bs.carousel', function() {
       
-      if ($($(".item")[currentIndex]).data('time')) {
-        time = $($(".item")[currentIndex]).data('time') * 1000;
+      var c = $('#myCarousel');
+
+      index = $('div.active').index() + 1;
+
+      if (index == totalItems) {
+        index = 0;
       }
+      
+      if ($($(".item")[index]).data('time')) {
+        time = $($(".item")[index]).data('time') * 1000;
+      }
+
       opt = c.data()['bs.carousel'].options;
       opt.interval= time;
       c.data({options: opt});

@@ -90,7 +90,7 @@
 							</div>
 						
 							<div class="form-group row">
-								<label for="configuration" class="col-md-4 col-form-label text-md-right">{{ __('Device Setup') }}</label>
+								<label for="configuration" class="col-md-4 col-form-label text-md-right">{{ __('Configuration') }}</label>
 								<div class="col-md-6">
 									<textarea id="configuration" name="configuration" type="text" class="form-control" autofocus>{{ $device->configuration }}</textarea>
 								</div>
