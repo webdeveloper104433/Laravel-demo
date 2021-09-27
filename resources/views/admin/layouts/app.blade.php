@@ -99,6 +99,12 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        @if (Auth::user()->type == "super_admin")
+                                            <a class="dropdown-item" href="{{ url('admin/db_backup') }}">
+                                                {{ __('DB Backup') }}
+                                            </a>
+                                        @endif
                                         <a class="dropdown-item" href="{{ route('admin.profile') }}">
                                             {{ __('Profile') }}
                                         </a>

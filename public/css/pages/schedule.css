@@ -10,9 +10,11 @@
     border: 0px;
     border-radius: 0px;
   }
-  .image-one-item {
+  
+  .image-one-item, .image-one-row {
     max-height: 500px;
   }
+  
 
   .schedule-content {
     width: 100%;

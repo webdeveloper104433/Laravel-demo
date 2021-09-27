@@ -16,7 +16,7 @@
       @if (array_key_exists('google_images', $data))
         @foreach ($data['google_images'] as $key=>$google_images)
           @foreach ($google_images as $google_image)
-            <div style="padding-top: 20px; height: 100vh;" class="item" data-time="3">
+            <div style="padding: 20px; height: 100vh;" class="item" data-time="10">
               <h3 class="google-image-title">{{ $data['title']['google_images'][$key] }}</h3>
               <img src="{{ $google_image->url }}" class="google-image" >
             </div>
@@ -26,7 +26,7 @@
 
       @if (array_key_exists('sites', $data))
         @foreach ($data['sites'] as $key=>$site)
-          <div style="padding-top: 20px; @if (!(array_key_exists('title', $data) && $data['title'] == 'off')) height: 90vh; @else height: 100vh; @endif" class="item" data-time="{{ $data['time']['sites'][$key] }}">
+          <div style="padding: 20px; @if (!(array_key_exists('title', $data) && $data['title'] == 'off')) height: 90vh; @else height: 100vh; @endif" class="item" data-time="{{ $data['time']['sites'][$key] }}">
               <!-- <div> -->
                 <iframe class="site-iframe" src="{{ $site->url }}"></iframe>
             <!-- </div> -->
@@ -37,13 +37,13 @@
       @if (array_key_exists('schedules', $data))
         @foreach ($data['schedules'] as $key=>$schedules)
           @for ($i = 1; $i <= ceil($schedules->count() / 4); $i ++)
-            <div style="padding-top: 20px;" class="item" data-time="{{ $data['time']['schedules'][$key] }}">
+            <div style="padding: 20px;" class="item" data-time="{{ $data['time']['schedules'][$key] }}">
                 <!-- <div> -->
                   <div class="" style="padding: 10px;">
                     <!-- Wrapper for slides -->
                     <h1 class="schedule-title">Termine</h1>
                 
-                    <div class="table-responsive text-center" style="margin-top: 10px; width: 100%;">
+                    <div class="table-responsive text-center" style="margin-top: 10px; width: 100%; border: 0px;">
                 
                       <table class="schedule-content" cellspacing="10px">
                         <tbody>
@@ -57,7 +57,7 @@
                             @endif
                                 <td class="schedule-border @if (($loop->index + 2) % 2 == 0) left-background-color @else right-background-color @endif">
                                   <div>
-                                    <img class="schedule-img @if (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 2 == 1) && (($loop->index + 1) % 4 == 1)) schedule-image-one @else schedule-image @endif" src="{{ asset('storage') . '/' . $schedule->image->url }}">
+                                    <img class="img-thumbnail @if (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 2 == 1) && (($loop->index + 1) % 4 == 1)) image-one-item @elseif ((($schedules->count() == $loop->index + 2) && (($loop->index + 2) % 4 == 2)) || (($schedules->count() == $loop->index + 1) && (($loop->index + 1) % 4 == 2))) image-one-row @else schedule-image @endif" src="{{ asset('storage') . '/' . $schedule->image->url }}">
                                   </div>
                                   <div style="">
                                     <strong>

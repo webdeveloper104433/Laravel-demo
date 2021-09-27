@@ -22,7 +22,7 @@ class DevicesController extends Controller
 		if(auth()->user()->type == "super_admin") {
 	        $devices = Device::orderByDesc('id')->get();
 		} else {
-			$devices = Device::orderByDesc('id')->where('client_id', auth()->user()->client_id)->orWhereNull('client_id')->get();
+			$devices = Device::orderByDesc('id')->where('client_id', auth()->user()->client_id)->get();
 		}
         return view('admin/devices/index', ["devices" => $devices, 'page_name' => self::PAGE_NAME]);
     }
@@ -89,6 +89,10 @@ class DevicesController extends Controller
 
 			if ($request->filled('configuration')) {
 				$device->configuration = $request->configuration;
+			}
+
+            if ($request->filled('description')) {
+				$device->description = $request->description;
 			}
 
 			if ($request->filled('device_heartbeat_minutes')) {

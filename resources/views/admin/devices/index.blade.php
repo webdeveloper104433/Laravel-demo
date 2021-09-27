@@ -23,6 +23,7 @@
                                 <th>Active</th>
                                 <th>Last Access</th>
                                 <th>Configuration</th>
+                                <th>Description</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -33,7 +34,8 @@
                                         <td>{{ $device->device_code }}</td>
                                         <td>@if ($device->enabled) Enabled @else Disabled @endif</td>
                                         <td>{{ $device->timestamp_last_accessed }}</td>
-                                        <td>{{ $device->configuration }}</td>
+                                        <td>{{ \Illuminate\Support\Str::limit($device->configuration, 20, $end='...') }}</td>
+                                        <td>{{ \Illuminate\Support\Str::limit($device->description, 20, $end='...') }}</td>
                                         <td>
 											<div class="btn-group btn-group-sm">
 												<a href="{{ url('admin/devices/' . $device->id . '/edit') }}" class="btn btn-primary">Edit</a>

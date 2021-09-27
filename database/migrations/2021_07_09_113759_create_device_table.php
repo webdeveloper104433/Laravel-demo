@@ -22,6 +22,7 @@ class CreateDeviceTable extends Migration
             $table->string('timestamp_registered')->nullable();
             $table->string("eMail_of_admin")->nullable();
             $table->text("configuration")->nullable();
+            $table->text("description")->nullable();
             $table->string("device_up_time")->nullable();
             $table->string("device_down_time")->nullable();
             $table->string("device_heartbeat_minutes")->nullable();

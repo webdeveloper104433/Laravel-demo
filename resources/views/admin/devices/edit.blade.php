@@ -95,6 +95,13 @@
 									<textarea id="configuration" name="configuration" type="text" class="form-control" autofocus>{{ $device->configuration }}</textarea>
 								</div>
 							</div>
+
+                            <div class="form-group row">
+								<label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+								<div class="col-md-6">
+									<textarea id="description" name="description" type="text" class="form-control" autofocus>{{ $device->description }}</textarea>
+								</div>
+							</div>
 						@endif
                         <hr>
                         <div class="form-group row mb-0">

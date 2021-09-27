@@ -21,6 +21,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
 
 	Route::get('/', 'HomeController@index');
+	Route::get('/db_backup', 'BackupController@db_backup');
 
 	Route::name('admin.')->group(function () {
 		Auth::routes();
